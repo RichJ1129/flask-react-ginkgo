@@ -75,6 +75,3 @@ def check_status(job_key):
 
     return jsonify({"job_id": job.id, "job_status": job.get_status()})
 
-
-if __name__ == '__main__':
-	app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
