@@ -1,5 +1,6 @@
 from flask import Flask, session, jsonify, request, abort, make_response
 import datetime
+import os
 from rq.job import Job
 from .redis_resc import redis_conn, redis_queue
 from .functions import search_for_protein
@@ -76,4 +77,4 @@ def check_status(job_key):
 
 
 if __name__ == '__main__':
-	app.run()
+	app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
