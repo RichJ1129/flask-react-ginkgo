@@ -41,7 +41,7 @@ def search_for_protein(search_string):
 					seq_information['name'] = seq_record.description
 					seq_information['start_pos'] = search_result
 					seq_information['end_pos'] = search_result + len(search_string) - 1
-					session[search_string] = seq_information
+					# session[search_string] = seq_information
 					return {'Sequence Info': seq_information}
 
 	seq_information['name'] = "Sequence not Found"

@@ -59,12 +59,12 @@ def search_queue():
 	job = redis_queue.enqueue(search_for_protein, search_string, result_ttl=500)
 
 	if search_string['sequence'] == '':
-		# session['empty'] = job.get_id()
+		session['empty'] = job.get_id()
 		res = make_response("Not Acceptable")
 		res.status_code = 406
 		return res
 	else:
-		# session[search_string['sequence']] = job.get_id()
+		session[search_string['sequence']] = job.get_id()
 		return jsonify({"job_id": job.id})
 
 
@@ -72,6 +72,7 @@ def search_queue():
 def get_results(job_key):
 	"""Takes a job_id and gets it's result as long as it has been completed"""
 	job = Job.fetch(job_key, connection=redis_conn)
+	print(job)
 
 	if job.is_finished:
 		return job.result
