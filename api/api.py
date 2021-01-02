@@ -59,12 +59,12 @@ def search_queue():
 	job = redis_queue.enqueue(search_for_protein, search_string, result_ttl=31536000)
 
 	if search_string['sequence'] == '':
-		session['empty'] = job.get_id()
+		# session['empty'] = job.get_id()
 		res = make_response("Not Acceptable")
 		res.status_code = 406
 		return res
 	else:
-		session[search_string['sequence']] = job.get_id()
+		# session[search_string['sequence']] = job.get_id()
 		return jsonify({"job_id": job.id})
 
 
