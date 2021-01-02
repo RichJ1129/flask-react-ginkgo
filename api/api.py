@@ -1,17 +1,16 @@
-import json
-from flask import Flask, session, jsonify, request, render_template, abort
-import random
-from Bio import SeqIO
+from flask import Flask, session, jsonify, request, abort, make_response
 import datetime
-import os
 from rq.job import Job
 from redis_resc import redis_conn, redis_queue
 from functions import search_for_protein
+from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
 app.permanent_session_lifetime = datetime.timedelta(days=365)
 app.secret_key = 'any random string'
+cors = CORS(app)
+
 
 
 
@@ -19,29 +18,38 @@ app.secret_key = 'any random string'
 def get_found_proteins():
 	all_sequences = []
 
-	# session.clear()
 	for name in session:
+		if name == 'empty':
+			continue
+
 		sequence_iteration = get_results(session[name])
 		sequence_iteration = sequence_iteration['Sequence Info']
 
-		all_sequences.append({'name': sequence_iteration['name'], 'start_pos': sequence_iteration['start_pos'],
+		all_sequences.append({'name': sequence_iteration['name'],
+							  'start_pos': sequence_iteration['start_pos'],
 							  'end_pos': sequence_iteration['end_pos'],
 							  'search_string': sequence_iteration['search_string'],
 							  'time': sequence_iteration['time']})
 
+	all_sequences = sorted(all_sequences, key=lambda i: i['time'], reverse=True)
+
 	return jsonify({'sequences': all_sequences})
-	return 'hello'
 
 
 @app.route('/api/search_protein', methods=['POST'])
 def search_queue():
 
 	search_string = request.json
-	job = redis_queue.enqueue(search_for_protein, search_string)
+	job = redis_queue.enqueue(search_for_protein, search_string, result_ttl=31536000)
 
-	session[search_string['sequence']] = job.get_id()
-
-	return jsonify({"job_id": job.id})
+	if search_string['sequence'] == '':
+		session['empty'] = job.get_id()
+		res = make_response("Not Acceptable")
+		res.status_code = 406
+		return res
+	else:
+		session[search_string['sequence']] = job.get_id()
+		return jsonify({"job_id": job.id})
 
 
 @app.route("/api/results/<job_key>", methods=['GET'])

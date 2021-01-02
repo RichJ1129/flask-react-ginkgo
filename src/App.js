@@ -1,9 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import React, {useState, useEffect} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {SequenceForm} from "./components/sequenceForm";
 import {Sequences} from './components/savedSequences';
 import {Col, Row, Container} from "react-bootstrap";
+
 
 function App() {
     const [sequences, setSequences] = useState([]);
@@ -41,5 +41,7 @@ function App() {
     );
 }
 
+
 export default App;
+
 

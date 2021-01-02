@@ -11,10 +11,8 @@ def search_for_protein(search_string):
 
 	searched_files = set()
 
-
 	search_string = search_string['sequence'].upper()
 	search_string = search_string.replace('\n', '')
-	# search_string = search_string.replace(' ', '')
 
 	seq_information = {
 		'name': '',
@@ -42,10 +40,7 @@ def search_for_protein(search_string):
 					seq_information['name'] = seq_record.description
 					seq_information['start_pos'] = search_result
 					seq_information['end_pos'] = search_result + len(search_string) - 1
-					# session[search_string] = seq_information
-					print('reached')
 					return {'Sequence Info': seq_information}
 
 	seq_information['name'] = "Sequence not Found"
-	# session[search_string] = seq_information
 	return {'Sequence Info': seq_information}

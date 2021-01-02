@@ -8,7 +8,7 @@ export const Sequences = ({ sequences }) => {
       <tr>
         <th>Search Time </th>
         <th>Definition</th>
-        <th>Search String (First 5 Chars)</th>
+        <th>Search String</th>
         <th>Start Position</th>
         <th>End Position</th>
       </tr>
