@@ -3,17 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
+    "bootstrap": "^4.5.3",
+    "formik": "^2.2.6",
+    "npm-run-all": "^4.1.5",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "semantic-ui-react": "^2.0.1",
+    "web-vitals": "^0.2.4",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api": "cd api && venv/bin/flask run --no debugger",
+    "start-api": "cd api && venv/bin/flask run --no-debugger",
+    "start-all": "npm-run-all -p start-api start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

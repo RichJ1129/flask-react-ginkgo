@@ -1,25 +1,45 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
+import {SequenceForm} from "./components/sequenceForm";
+import {Sequences} from './components/savedSequences';
+import {Col, Row, Container} from "react-bootstrap";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [sequences, setSequences] = useState([]);
+
+    useEffect(() => {
+        fetch("api/get_proteins").then(response =>
+            response.json().then(data => {
+                setSequences(data.sequences);
+            })
+        );
+    }, []);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <Container>
+                    <Row>
+                        <Col sm = {5}>
+                            <div className="search_box">
+                            <SequenceForm
+                                onNewSequence={sequence =>
+                                    setSequences(currentSequences => [sequence, ...currentSequences])
+                                }
+                            />
+                            </div>
+                        </Col>
+                        <Col sm = {7}>
+                            <Sequences sequences={sequences}/>
+                        </Col>
+                    </Row>
+                </Container>
+            </header>
+
+        </div>
+    );
 }
 
 export default App;
+
