@@ -3,10 +3,13 @@ from flask import Flask, session, jsonify, request, render_template
 import random
 from Bio import SeqIO
 import datetime
+import os.path
 
 permanent_session_lifetime = datetime.timedelta(days=365)
 
 def search_for_protein(search_string):
+	print(os.path.dirname(__file__))
+
 	seq_files = ['NC_000852.fasta', 'NC_007346.fasta', 'NC_008724.fasta', 'NC_009899.fasta', 'NC_014637.fasta',
 				 'NC_020104.fasta', 'NC_023423.fasta', 'NC_023640.fasta', 'NC_023719.fasta', 'NC_027867.fasta']
 
