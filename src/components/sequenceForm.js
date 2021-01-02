@@ -40,6 +40,23 @@ export const SequenceForm = ({onNewSequence}) => {
                     }}>
                     Submit
                 </Button>
+                <Button
+                    onClick={async () => {
+                        const response = await fetch("/api/clear_searches", {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                        });
+
+                        if (response.ok) {
+                            console.log("response worked!");
+                            window.location.reload()
+                        }
+
+                    }}>
+                    Clear Searches </Button>
+
             </Form.Group>
         </Form>
     );
