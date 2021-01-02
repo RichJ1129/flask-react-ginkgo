@@ -40,7 +40,9 @@ export const SequenceForm = ({onNewSequence}) => {
                     }}>
                     Submit
                 </Button>
-                <Button
+            </Form.Group>
+            <Form.Group>
+                                <Button
                     onClick={async () => {
                         const response = await fetch("/api/clear_searches", {
                             method: "GET",
@@ -56,7 +58,6 @@ export const SequenceForm = ({onNewSequence}) => {
 
                     }}>
                     Clear Searches </Button>
-
             </Form.Group>
         </Form>
     );
