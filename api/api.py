@@ -38,11 +38,13 @@ def get_found_proteins():
 
 	return jsonify({'sequences': all_sequences})
 
+
 @app.route('/api/clear_searches', methods=['GET'])
-def get_found_proteins():
+def clear_searches():
 	session.clear()
 
 	return 'Sessions Cleared'
+
 
 @app.route('/api/search_protein', methods=['POST'])
 def search_queue():
