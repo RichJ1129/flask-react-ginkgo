@@ -24,6 +24,8 @@ def get_found_proteins():
 	all_sequences = []
 
 	for name in session:
+		print(name)
+		print(session[name])
 		if name == 'empty':
 			continue
 
