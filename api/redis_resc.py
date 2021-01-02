@@ -2,7 +2,7 @@
 import os
 
 import redis
-from rq import Queue
+from rq import Queue, Worker, Connection
 
 # redis_conn = redis.Redis(
 #     host=os.getenv("REDIS_HOST", "127.0.0.1"),
@@ -10,6 +10,13 @@ from rq import Queue
 #     password=os.getenv("REDIS_PASSWORD", ""),
 # )
 
-redis_conn = redis.from_url(os.environ['REDIS_URL'])
+listen = ['high', 'default', 'low']
+redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
 
-redis_queue = Queue(connection=redis_conn)
+redis_conn = redis.from_url(redis_url)
+
+if __name__ == '__main__':
+    with Connection(redis_conn):
+        worker = Worker(map(Queue, listen))
+        worker.work()
+

@@ -2,7 +2,8 @@ from flask import Flask, session, jsonify, request, abort, make_response
 import datetime
 import os
 from rq.job import Job
-from .redis_resc import redis_conn, redis_queue
+from rq import Queue
+from .redis_resc import redis_conn
 from .functions import search_for_protein
 from flask_cors import CORS, cross_origin
 
@@ -12,6 +13,7 @@ app.permanent_session_lifetime = datetime.timedelta(days=365)
 app.secret_key = 'any random string'
 cors = CORS(app)
 
+redis_queue = Queue(connection=redis_conn)
 
 @app.route('/')
 def index():
