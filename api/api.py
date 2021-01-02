@@ -6,13 +6,15 @@ from functions import search_for_protein
 from flask_cors import CORS, cross_origin
 
 
-app = Flask(__name__)
+app = Flask(static_folder='../build', static_url_path='/')
 app.permanent_session_lifetime = datetime.timedelta(days=365)
 app.secret_key = 'any random string'
 cors = CORS(app)
 
 
-
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/api/get_proteins', methods=['GET'])
 def get_found_proteins():
