@@ -4,6 +4,7 @@ import random
 from Bio import SeqIO
 import datetime
 
+permanent_session_lifetime = datetime.timedelta(days=365)
 
 def search_for_protein(search_string):
 	seq_files = ['NC_000852.fasta', 'NC_007346.fasta', 'NC_008724.fasta', 'NC_009899.fasta', 'NC_014637.fasta',
