@@ -1,6 +1,6 @@
-from main import api
+from main import app
 import os
 
 if __name__ == "__main__":
-	api.run()
+	app.run()
 
