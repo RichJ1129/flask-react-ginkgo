@@ -35,7 +35,7 @@ def search_for_protein(search_string):
 		random_file_choice = random.choice(seq_files)
 		if random_file_choice not in searched_files:
 			searched_files.add(random_file_choice)
-			for seq_record in SeqIO.parse("static/proteins/" + random_file_choice, "fasta"):
+			for seq_record in SeqIO.parse(os.path.dirname(__file__) + "static/proteins/" + random_file_choice, "fasta"):
 				random_file_string = str(seq_record.seq)
 				random_file_string = random_file_string.replace('\n', '')
 				search_result = random_file_string.find(search_string)
