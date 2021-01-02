@@ -24,15 +24,15 @@ def get_found_proteins():
 	all_sequences = []
 
 	for name in session:
-		print(name)
-		print(session[name])
+		print('1: ', name)
+		print('2:', session[name])
 		if name == 'empty':
 			continue
 
 		sequence_iteration = get_results(session[name])
-		print(sequence_iteration)
+		print('3: ', sequence_iteration)
 		sequence_iteration = sequence_iteration['Sequence Info']
-		print(sequence_iteration)
+		print('4: ', sequence_iteration)
 
 		all_sequences.append({'name': sequence_iteration['name'],
 							  'start_pos': sequence_iteration['start_pos'],
