@@ -3,7 +3,7 @@ import datetime
 import os
 from rq.job import Job
 from rq import Queue
-from .redis_resc import redis_conn
+from ..worker import redis_conn
 from .functions import search_for_protein
 from flask_cors import CORS, cross_origin
 

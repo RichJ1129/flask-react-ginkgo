@@ -1,2 +1,2 @@
 web: gunicorn wsgi:app
-worker: rq worker api/redis_resc.py
+worker: python worker.py
