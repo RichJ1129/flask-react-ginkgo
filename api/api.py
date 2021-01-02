@@ -30,7 +30,9 @@ def get_found_proteins():
 			continue
 
 		sequence_iteration = get_results(session[name])
+		print(sequence_iteration)
 		sequence_iteration = sequence_iteration['Sequence Info']
+		print(sequence_iteration)
 
 		all_sequences.append({'name': sequence_iteration['name'],
 							  'start_pos': sequence_iteration['start_pos'],
