@@ -56,7 +56,7 @@ def clear_searches():
 def search_queue():
 
 	search_string = request.json
-	job = redis_queue.enqueue(search_for_protein, search_string, result_ttl=500)
+	job = redis_queue.enqueue(search_for_protein, search_string, result_ttl=31557600)
 
 	if search_string['sequence'] == '':
 		session['empty'] = job.get_id()
