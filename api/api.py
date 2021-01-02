@@ -1,8 +1,8 @@
 from flask import Flask, session, jsonify, request, abort, make_response
 import datetime
 from rq.job import Job
-from redis_resc import redis_conn, redis_queue
-from functions import search_for_protein
+from .redis_resc import redis_conn, redis_queue
+from .functions import search_for_protein
 from flask_cors import CORS, cross_origin
 
 
