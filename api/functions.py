@@ -17,6 +17,7 @@ def search_for_protein(search_string):
 
 	search_string = search_string['sequence'].upper()
 	search_string = search_string.replace('\n', '')
+	search_string = search_string.replace(' ', '')
 
 	seq_information = {
 		'name': '',
