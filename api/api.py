@@ -3,12 +3,13 @@ import datetime
 import os
 from rq.job import Job
 from rq import Queue
+import sys
+sys.path.append('..')
 from worker import redis_conn
-from .functions import search_for_protein
 from flask_cors import CORS, cross_origin
+from api import app
+from api.functions import search_for_protein
 
-
-app = Flask(__name__, static_folder='../build', static_url_path='/')
 app.permanent_session_lifetime = datetime.timedelta(days=365)
 app.secret_key = 'any random string'
 cors = CORS(app)

@@ -5,6 +5,7 @@ from Bio import SeqIO
 import datetime
 import os.path
 
+
 permanent_session_lifetime = datetime.timedelta(days=365)
 
 def search_for_protein(search_string):
